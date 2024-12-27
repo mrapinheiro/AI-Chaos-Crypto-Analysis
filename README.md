@@ -1,45 +1,36 @@
-# Stock Market Prediction Using Physics and AI
+# Crypto ARIMA Forecast & Chaotic Time Series
+
+This repository demonstrates how to:
+- Fetch cryptocurrency market data (e.g., Bitcoin) using **yfinance**  
+- Calculate a simplified **Average True Range (ATR)**  
+- Generate a **chaotic time series** using the logistic map  
+- Fit an **ARIMA model** to forecast crypto prices  
+- Produce a basic **Buy/Hold/Sell** trading signal  
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+
+---
 
 ## Overview
-This project integrates concepts from physics and artificial intelligence to predict stock market prices. By drawing parallels from theories such as punctuated equilibrium and chaos theory, and utilizing statistical models like ARIMA, this repository offers a novel approach to understanding and forecasting market dynamics.
+
+This project is primarily for **educational** and **demonstrational** purposes. It pulls daily crypto prices (e.g., BTC-USD) from Yahoo Finance, then uses a combination of **time series forecasting** and **heuristic-based signals** to generate a trading suggestion.
+
+**Key components** include:
+1. **Chaotic Time Series Generation**: Demonstrates how to map a logistic map sequence to real price ranges.  
+2. **ATR (Volatility) Filter**: Simplified approach to detect high volatility periods.  
+3. **ARIMA Forecasting**: Uses `statsmodels` to predict future prices.  
+4. **Heuristic Trading Signals**: Combines volatility check, day-over-day price change, and ARIMA forecasts to output “Buy,” “Sell,” or “Hold.”
+
+> **Note**: This is *not* financial advice or a production-ready trading bot. It simply illustrates some fundamental concepts in quantitative finance and chaos theory.
+
+---
 
 ## Features
-- **Chaos Theory Integration**: Generates chaotic data to simulate potential future price scenarios.
-- **ARIMA Model**: Employs the ARIMA model for accurate time series forecasting.
-- **Average True Range (ATR)**: Utilizes ATR to measure volatility and guide trading decisions.
-- **Punctuated Equilibrium Concept**: Applies this concept from paleontology to identify significant bursts of price changes.
 
-## Installation
-To set up this project, you'll need Python along with several libraries. You can install the dependencies with the following command:
-
-```bash
-pip install numpy pandas matplotlib statsmodels yfinance
-```
-
-## Usage
-The main script can be executed with Python. It fetches historical stock data, applies the ARIMA model and chaos theory for prediction, and provides trading signals.
-```bash
-python stock_prediction.py
-```
-
-## Files
-- `stock_prediction.py`: The main script containing all the logic for fetching data, generating predictions, and providing trading instructions.
-
-## Contributing
-Contributions to this project are welcome. Here are a few ways you can help:
-- Report bugs and issues.
-- Suggest improvements or new features.
-- Improve the documentation.
-
-To contribute, please fork the repository, make your changes, and submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
-
-## Acknowledgments
-- Sir Isaac Newton and Nicolaus Copernicus, for their inspirational work in physics and economics.
-- Niles Eldredge and Stephen Jay Gould, for the theory of punctuated equilibrium.
-- The developers and contributors of the Python libraries used in this project.
-
-## Contact
-For any feedback or questions, feel free to reach out through the Issues section of this repository.
+- **Fetch Crypto Data**: Download historical Bitcoin data using `yfinance`.
+- **Calculate Simplified ATR**: Identifies high-volatility periods that might invalidate forecasts.
+- **Generate Chaotic Prices**: Scales a logistic map sequence to approximate real-world price ranges.
+- **ARIMA Forecast**: Predicts the next 5 data points in a univariate time series.
+- **Trading Instruction**: Issues a naive trading signal based on heuristics.
