@@ -1,85 +1,117 @@
 # Crypto ARIMA Forecast & Chaotic Time Series
 
-This repository demonstrates how to:
-- Fetch cryptocurrency market data (specifically Bitcoin) using **yfinance**  
-- Calculate a simplified **Average True Range (ATR)** for volatility measurement  
-- Generate a **chaotic time series** using the logistic map equation  
-- Fit an **ARIMA model** to forecast cryptocurrency prices  
-- Produce a data-driven **Buy/Hold/Sell** trading signal  
+This repository demonstrates advanced cryptocurrency price analysis combining time series forecasting with chaos theory concepts to generate trading signals.
 
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [Implementation Details](#implementation-details)
+- [Installation](#installation)
 - [Usage](#usage)
-- [Dependencies](#dependencies)
-
----
+- [Methods](#methods)
+- [Example Output](#example-output)
+- [Disclaimer](#disclaimer)
+- [License](#license)
 
 ## Overview
 
-This project is primarily for **educational** and **demonstrational** purposes. It pulls daily Bitcoin prices (BTC-USD) from Yahoo Finance, then uses a combination of **time series forecasting** and **heuristic-based signals** to generate a trading suggestion.
+This project is primarily for **educational** and **demonstrational** purposes. It pulls daily cryptocurrency prices (currently focused on BTC-USD) from Yahoo Finance, then uses a combination of **time series forecasting** and **heuristic-based signals** to generate trading suggestions.
 
 **Key components** include:
-1. **Data Retrieval**: Fetches Bitcoin historical data from Yahoo Finance
-2. **Chaotic Time Series Generation**: Maps a logistic map sequence to real price ranges using the equation `x_{i+1} = r * x_i * (1 - x_i)`
-3. **ATR (Volatility) Filter**: Calculates a simplified Average True Range to detect high volatility periods
-4. **ARIMA Forecasting**: Uses `statsmodels` to predict future prices with an ARIMA(1,1,1) model
-5. **Heuristic Trading Signals**: Combines volatility check, day-over-day price change (>1.5%), and ARIMA forecasts to output "Buy," "Sell," or "Hold"
+1. **Chaotic Time Series Generation**: Maps a logistic map sequence to real price ranges to demonstrate chaotic behavior in financial markets
+2. **ATR (Volatility) Filter**: Detects high volatility periods when predictions may be less reliable
+3. **ARIMA Forecasting**: Uses `statsmodels` to predict future price movements
+4. **Heuristic Trading Signals**: Combines volatility metrics, day-over-day changes, and forecasts to output "Buy," "Sell," or "Hold" recommendations
 
-> **Note**: This is *not* financial advice or a production-ready trading bot. It simply illustrates some fundamental concepts in quantitative finance and chaos theory.
-
----
+> **Note**: This is *not* financial advice or a production-ready trading bot. It illustrates fundamental concepts in quantitative finance and chaos theory.
 
 ## Features
 
-- **Fetch Crypto Data**: Download historical Bitcoin data using `yfinance` from 2017 to present
-- **Calculate Simplified ATR**: Identifies high-volatility periods using a threshold of 500.0
-- **Generate Chaotic Prices**: Scales a logistic map sequence (with parameters r=3.9, x0=0.5) to approximate real-world price ranges
-- **ARIMA Forecast**: Predicts the next 5 data points using an ARIMA(1,1,1) model
-- **Trading Instruction**: Issues a trading signal based on:
-  - ATR threshold check (high volatility = "Hold")
-  - >1.5% day-over-day price change triggering directional signals
-  - ARIMA forecast comparison with current price
+- **Real-time Data Retrieval**: Download historical cryptocurrency data using `yfinance`
+- **Volatility Analysis**: Calculate simplified Average True Range (ATR) to identify market conditions
+- **Chaos Theory Application**: Generate synthetic price sequences using the logistic map
+- **Time Series Forecasting**: Implement ARIMA modeling for short-term price prediction
+- **Trading Signal Generation**: Produce actionable trading suggestions based on multiple factors
 
----
+## Installation
 
-## Implementation Details
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/crypto-arima-forecast.git
+cd crypto-arima-forecast
 
-The implementation follows these steps:
-1. Download BTC-USD historical data from 2017 to the current date
-2. Extract close prices for analysis
-3. Generate chaotic data using the logistic map with control parameter r=3.9
-4. Calculate ATR using high, low, and previous close prices
-5. Fit an ARIMA(1,1,1) model to forecast the next 5 days
-6. Analyze crypto price data to provide a trading instruction based on:
-   - ATR threshold check (default: 500.0)
-   - Price change percentage check (threshold: 1.5%)
-   - ARIMA forecast direction comparison
+# Install dependencies
+pip install -r requirements.txt
+```
 
----
+Required packages:
+- yfinance
+- numpy
+- pandas
+- statsmodels
+- matplotlib (optional, for visualization)
 
 ## Usage
 
-Run the script directly:
+Run the main script to generate forecasts and trading signals:
 
-```python
+```bash
 python crypto_prediction.py
 ```
 
-The output includes:
-- Historical Bitcoin data (head of dataframe)
-- Chaotic prices (last 5 data points)
-- ARIMA forecast for the next 5 days
-- Chaotic price and ARIMA forecast for tomorrow
-- Trading instruction for tomorrow (Buy/Hold/Sell)
+To customize parameters such as the cryptocurrency, date range, or ARIMA model order, edit the constants at the top of the script.
 
----
+## Methods
 
-## Dependencies
+### Data Retrieval
+The system pulls historical cryptocurrency data from Yahoo Finance using the `yfinance` library, focusing on daily close prices.
 
-- **yfinance**: For downloading market data
-- **numpy**: For numerical computations
-- **pandas**: For data manipulation
-- **statsmodels**: For ARIMA modeling
-- **datetime**: For date handling
+### Chaotic Data Generation
+A logistic map sequence is used to illustrate chaotic behavior in financial markets:
+
+```
+x_{i+1} = r * x_i * (1 - x_i)
+```
+
+Where:
+- `r` is the control parameter (set to 3.9 for chaotic behavior)
+- `x_0` is the initial condition
+
+### Volatility Analysis
+A simplified Average True Range (ATR) calculation identifies periods of high market volatility, which may impact prediction reliability.
+
+### ARIMA Forecasting
+The system uses an ARIMA (Autoregressive Integrated Moving Average) model to predict future price movements based on historical patterns.
+
+### Trading Signal Logic
+Trading signals are generated using:
+1. ATR threshold as a volatility filter
+2. Detection of significant day-over-day price changes
+3. ARIMA forecast comparison with current prices
+
+## Example Output
+
+The system generates outputs similar to:
+
+```
+Historical Crypto Data (head):
+              Open        High  ...     Volume  Adj Close
+Date                            ...                      
+2017-01-01  963.658081  963.658081  ...  8.382583  963.658081
+...
+
+ARIMA Forecast for Next 5 Days:
+[27850.12, 27903.45, 27956.78, 28010.11, 28063.44]
+
+Chaotic Price for Tomorrow (2025-03-13): 28104.37
+ARIMA Forecast for Tomorrow (2025-03-13): 27850.12
+
+2025-03-13 - Trading Instruction: Buy
+```
+
+## Disclaimer
+
+This tool is designed for educational purposes only. Cryptocurrency markets are highly volatile and unpredictable. The forecasts and signals generated by this system should not be considered financial advice. Always conduct your own research and consider consulting with a financial advisor before making investment decisions.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
