@@ -36,7 +36,7 @@ This project is primarily for **educational** and **demonstrational** purposes. 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/crypto-arima-forecast.git
+git clone https://github.com/mrapinheiro/crypto-arima-forecast.git
 cd crypto-arima-forecast
 
 # Install dependencies
